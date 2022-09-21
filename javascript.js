@@ -1,17 +1,17 @@
 function add(num1, num2) {
-    return +num1 + +num2;
+    return (+num1 + +num2).toFixed(4);
 }
 
 function subtract(num1, num2) {
-    return +num1 - +num2;
+    return (+num1 - +num2).toFixed(4);
 }
 
 function multiply(num1, num2) {
-    return +num1 * +num2;
+    return (+num1 * +num2).toFixed(4);
 }
 
 function divide(num1, num2) {
-    return +num1 / +num2;
+    return (+num1 / +num2).toFixed(4);
 }
 
 
@@ -91,7 +91,12 @@ function operate(op, num1, num2) {
     
     let result;
 
+
+   
+
     switch(op) {
+        case undefined:
+            result = +num1;
         case '+':
             result = add(num1, num2);
             break;
@@ -102,9 +107,16 @@ function operate(op, num1, num2) {
             result = multiply(num1, num2);
             break;
         case '/':
+            if (num2 == 0) {
+                result = "Error";
+            } else {
             result = divide(num1, num2);
+            }
             break;
     }
+
+    
+
     displayScreen.textContent = `${result}`;
     console.log(`result = ${result}`);
     return result;
@@ -114,6 +126,16 @@ function operate(op, num1, num2) {
 
 
 equalButton.addEventListener("click", () => {
+
+    if (num1 && !op) {
+        return num1;
+    }
+    else if (num1 && !num2) {
+        num2 = num1;
+       } else if (!num1) {
+        return 0;
+       } 
+
     num1 = operate(op, num1, num2);
     num2 = 0;
 });
