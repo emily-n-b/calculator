@@ -14,7 +14,6 @@ function divide(num1, num2) {
     return (+num1 / +num2).toFixed(4);
 }
 
-
 const clearButton = document.getElementById("clear");
 const negativeButton = document.getElementById("negative");
 const percentButton = document.getElementById("percent");
@@ -47,8 +46,6 @@ let op;
 const numbers = document.querySelectorAll(".number");
 numbers.forEach((number) => {number.addEventListener('click', () => {
     
- 
-    
     if (!num1) {
         num1 = number.textContent;
         displayValue = num1;
@@ -65,13 +62,11 @@ numbers.forEach((number) => {number.addEventListener('click', () => {
     
     displayScreen.textContent = `${displayValue}`;
 
-
     console.log(`num1 = ${num1}`);
     console.log(`num2 = ${num2}`);
 }
 )});
 
-//
 const operators = document.querySelectorAll(".operator");
 operators.forEach(operator => {operator.addEventListener('click', () => {
     
@@ -84,15 +79,11 @@ operators.forEach(operator => {operator.addEventListener('click', () => {
     op = operator.textContent;
     console.log(op);
 
-
 })})
 
 function operate(op, num1, num2) {
     
     let result;
-
-
-   
 
     switch(op) {
         case undefined:
@@ -115,26 +106,20 @@ function operate(op, num1, num2) {
             break;
     }
 
-    
-
     displayScreen.textContent = `${result}`;
     console.log(`result = ${result}`);
     return result;
-
 }
-
-
 
 equalButton.addEventListener("click", () => {
 
     if (num1 && !op) {
         return num1;
-    }
-    else if (num1 && !num2) {
+    } else if (num1 && !num2) {
         num2 = num1;
-       } else if (!num1) {
+    } else if (!num1) {
         return 0;
-       } 
+    } 
 
     num1 = operate(op, num1, num2);
     num2 = 0;
