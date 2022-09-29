@@ -1,17 +1,17 @@
 function add(num1, num2) {
-    return (+num1 + +num2).toFixed(4);
+    return (+num1 + +num2);
 }
 
 function subtract(num1, num2) {
-    return (+num1 - +num2).toFixed(4);
+    return (+num1 - +num2);
 }
 
 function multiply(num1, num2) {
-    return (+num1 * +num2).toFixed(4);
+    return (+num1 * +num2);
 }
 
 function divide(num1, num2) {
-    return (+num1 / +num2).toFixed(4);
+    return (+num1 / +num2);
 }
 
 const clearButton = document.getElementById("clear");
@@ -106,6 +106,21 @@ function operate(op, num1, num2) {
             break;
     }
 
+    // rounds decimal places
+    if (!Number.isInteger(result)) {
+        if (result.toString().length > 10) {
+            let string = result.toString().split('.');
+            let decimals = string[1];
+            let nums = string[0];
+
+            if (decimals >= nums) {
+                result = result.toFixed(3);
+            } 
+        }
+    }
+
+    parseFloat(result); // removes trailing 0's
+
     displayScreen.textContent = `${result}`;
     console.log(`result = ${result}`);
     return result;
@@ -131,4 +146,50 @@ clearButton.addEventListener("click", () => {
     op = null;
     displayValue = 0;
     displayScreen.textContent = `${displayValue}`;
+});
+
+negativeButton.addEventListener("click", () => {
+    if (num2) {
+        num2 = num2 - (num2 * 2); 
+        displayValue = num2;
+        displayScreen.textContent = `${displayValue}`;
+    } else if (num1 && !num2) {
+        num1 = num1 - (num1 * 2); 
+        displayValue = num1;
+        displayScreen.textContent = `${displayValue}`;
+    }
+}
+);
+
+percentButton.addEventListener("click", () => {
+    if (num2) {
+        num2 *= .01; 
+        displayValue = num2;
+        displayScreen.textContent = `${displayValue}`;
+    } else if (num1 && !num2) {
+        num1 *= .01; 
+        displayValue = num1;
+        displayScreen.textContent = `${displayValue}`;
+    }
+});
+
+decimalButton.addEventListener("click", () => {
+    if (num2) {
+        if (!num2.includes('.')) {
+            num2 += '.'; 
+            displayValue = num2;
+            displayScreen.textContent = `${displayValue}`;
+        }
+    } else if (num1 && !num2) {
+        if (!num1.includes('.')) {
+            num1 += '.'; 
+            displayValue = num1;
+            displayScreen.textContent = `${displayValue}`;
+        }
+    } else if (!num1 && !num2) {
+        num1 = '0.'; 
+        displayValue = num1;
+        displayScreen.textContent = `${displayValue}`;
+        
+    }
 });
