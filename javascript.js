@@ -1,20 +1,10 @@
-function add(num1, num2) {
-    return (+num1 + +num2);
-}
-
-function subtract(num1, num2) {
-    return (+num1 - +num2);
-}
-
-function multiply(num1, num2) {
-    return (+num1 * +num2);
-}
-
-function divide(num1, num2) {
-    return (+num1 / +num2);
-}
+function add(num1, num2) { return (+num1 + +num2); }
+function subtract(num1, num2) { return (+num1 - +num2); }
+function multiply(num1, num2) { return (+num1 * +num2); }
+function divide(num1, num2) { return (+num1 / +num2); }
 
 const clearButton = document.getElementById("clear");
+const backspaceButton = document.getElementById("backspace");
 const negativeButton = document.getElementById("negative");
 const percentButton = document.getElementById("percent");
 const divideButton = document.getElementById("divide");
@@ -45,7 +35,6 @@ let op;
 
 const numbers = document.querySelectorAll(".number");
 numbers.forEach((number) => {number.addEventListener('click', () => {
-    
     if (!num1) {
         num1 = number.textContent;
         displayValue = num1;
@@ -59,32 +48,21 @@ numbers.forEach((number) => {number.addEventListener('click', () => {
         num2 += number.textContent;
         displayValue = num2;
     }
-    
     displayScreen.textContent = `${displayValue}`;
-
-    console.log(`num1 = ${num1}`);
-    console.log(`num2 = ${num2}`);
-}
-)});
+})});
 
 const operators = document.querySelectorAll(".operator");
 operators.forEach(operator => {operator.addEventListener('click', () => {
-    
     if (num1 && num2 && op) {
         num1 = operate(op, num1, num2);
         displayScreen.textContent = `${num1}`;
         num2 = 0;
     }
-
     op = operator.textContent;
-    console.log(op);
-
-})})
+})});
 
 function operate(op, num1, num2) {
-    
     let result;
-
     switch(op) {
         case undefined:
             result = +num1;
@@ -105,7 +83,6 @@ function operate(op, num1, num2) {
             }
             break;
     }
-
     // rounds decimal places
     if (!Number.isInteger(result)) {
         if (result.toString().length > 10) {
@@ -118,16 +95,12 @@ function operate(op, num1, num2) {
             } 
         }
     }
-
     parseFloat(result); // removes trailing 0's
-
     displayScreen.textContent = `${result}`;
-    console.log(`result = ${result}`);
     return result;
 }
 
 equalButton.addEventListener("click", () => {
-
     if (num1 && !op) {
         return num1;
     } else if (num1 && !num2) {
@@ -135,7 +108,6 @@ equalButton.addEventListener("click", () => {
     } else if (!num1) {
         return 0;
     } 
-
     num1 = operate(op, num1, num2);
     num2 = 0;
 });
@@ -158,8 +130,7 @@ negativeButton.addEventListener("click", () => {
         displayValue = num1;
         displayScreen.textContent = `${displayValue}`;
     }
-}
-);
+});
 
 percentButton.addEventListener("click", () => {
     if (num2) {
@@ -191,5 +162,17 @@ decimalButton.addEventListener("click", () => {
         displayValue = num1;
         displayScreen.textContent = `${displayValue}`;
         
+    }
+});
+
+backspaceButton.addEventListener("click", () => {
+    if (num2) {
+        num2 = num2.toString().slice(0, -1); 
+        displayValue = num2;
+        displayScreen.textContent = `${displayValue}`;
+    } else if (num1 && !num2) {
+        num1 = num1.toString().slice(0, -1);
+        displayValue = num1;
+        displayScreen.textContent = `${displayValue}`;
     }
 });

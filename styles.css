@@ -1,3 +1,8 @@
+* {
+    border: 0px solid red;
+    background-color: rgb(255, 244, 230);
+}
+
 body {
     display: flex;
     align-items: center;
@@ -6,55 +11,63 @@ body {
 }
 
 #calculator {
-    width: 460px;
-    height: 500px;
-    border: 1px solid lightgray;
-    border-radius: 0;
+    width: 400px;
+    height: 600px;
+    border: 1px solid darkgray;
+    border-radius: 24px;
     display: flex;
     flex-direction: column;
     color: white;
     font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(241, 179, 212);
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
 
 }
 
 #display {
-    width: 436px;
-    height: 100px;
-    background-color: black;
+    width: 330px;
+    height: 80px;
+    background-color: rgb(162, 167, 244);
     text-align: right;
     font-size: 72px;
-    padding: 16px 12px 8px;
-    margin-bottom: -20px;
+    padding: 8px 12px 8px;
+    margin-bottom: 20px;
+    border: 1px solid rgb(113, 113, 113);
+    border-radius: 12px;
     
 }
 
 #button-container {
     display: grid;
-    grid-template-columns: repeat(4, 115px);
+    grid-template-columns: repeat(4, 80px);
+    grid-gap: 10px;
+    background-color: rgb(241, 179, 212);
+
 
 }
 
 .button {
-    padding: 22px;
-    border-radius: 0;
-    border: 1px solid grey;
+    padding: 0px;
+    border-radius: 20px;
+    border: 1px solid rgb(113, 113, 113);
     height: 80px;
     color: white;
     font-size: 36px;
+    
 }
 
 .color-1 {
-    background-color: rgb(190, 190, 190);
+    background-color: rgb(170, 170, 170);
 }
 
 .color-2 {
-    background-color: rgb(113, 113, 113);
+    background-color: rgb(171, 249, 198);
+    color:rgb(141, 141, 141)
 }
 
 .color-3 {
-    background-color: orange;
-}
-
-#zero {
-    grid-column: span 2;
+    background-color: rgb(253, 229, 121);
+    color:rgb(141, 141, 141)
 }
