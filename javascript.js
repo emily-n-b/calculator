@@ -26,6 +26,7 @@ const equalButton = document.getElementById("equal");
 const displayScreen = document.getElementById("display");
 
 let displayValue = 0;
+
 displayScreen.textContent = `${displayValue}`;
 
 let num1;
