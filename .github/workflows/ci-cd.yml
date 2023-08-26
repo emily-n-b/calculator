@@ -24,32 +24,24 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
-    
+      
       - name: Measure Deployment Metrics
         run: |
           echo "Deployment Frequency: 1 deployment"
           if [ ${{ steps.deploy.outcome }} == 'success' ]; then
-            echo "Deployment Success Rate: 100%"
+            echo "Deployment Success Rate: 100%" > metrics.txt
           else
-            echo "Deployment Success Rate: 0%"
+            echo "Deployment Success Rate: 0%" > metrics.txt
           fi
-    
+      
       - name: Measure Response Time
         run: |
           response_time=$(curl -o /dev/null -s -w "%{time_total}\n" https://your-username.github.io/your-repo-name/)
-          echo "Response Time: $response_time seconds"
-          
+          echo "Response Time: $response_time seconds" >> metrics.txt
+      
       - name: Upload Metrics as Artifact
         uses: actions/upload-artifact@v2
         with:
           name: metrics
           path: metrics.txt
 
-      - name: Measure Deployment Metrics
-        run: |
-          echo "Deployment Frequency: 1 deployment"
-          if [ ${{ steps.deployment.outcome }} == 'success' ]; then
-            echo "Deployment Success Rate: 100%"
-          else
-            echo "Deployment Success Rate: 0%"
-          fi
