@@ -18,12 +18,21 @@ jobs:
           mkdir build
           cp index.html javascript.js styles.css build/
       
-
       - name: Deploy to GitHub Pages
+        id: deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
+    
+      - name: Measure Deployment Metrics
+        run: |
+          echo "Deployment Frequency: 1 deployment"
+          if [ ${{ steps.deploy.outcome }} == 'success' ]; then
+            echo "Deployment Success Rate: 100%"
+          else
+            echo "Deployment Success Rate: 0%"
+          fi
     
       - name: Measure Response Time
         run: |
