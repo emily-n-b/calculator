@@ -24,11 +24,17 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
-
-      - name: Measure Page Load Time
+    
+      - name: Measure Response Time
         run: |
           response_time=$(curl -o /dev/null -s -w "%{time_total}\n" https://your-username.github.io/your-repo-name/)
-          echo "Page Load Time: $response_time seconds"
+          echo "Response Time: $response_time seconds"
+          
+      - name: Upload Metrics as Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: metrics
+          path: metrics.txt
 
       - name: Measure Deployment Metrics
         run: |
