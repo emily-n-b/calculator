@@ -36,7 +36,7 @@ jobs:
       
       - name: Measure Response Time
         run: |
-          response_time=$(curl -o /dev/null -s -w "%{time_total}\n" https://your-username.github.io/your-repo-name/)
+          response_time=$(curl -o /dev/null -s -w "%{time_total}\n" https://emily-n-b.github.io/calculator/)
           echo "Response Time: $response_time seconds" >> metrics.txt
       
       - name: Upload Metrics as Artifact
