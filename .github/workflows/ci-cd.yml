@@ -25,3 +25,16 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
 
+      - name: Measure Page Load Time
+        run: |
+          response_time=$(curl -o /dev/null -s -w "%{time_total}\n" https://your-username.github.io/your-repo-name/)
+          echo "Page Load Time: $response_time seconds"
+
+      - name: Measure Deployment Metrics
+        run: |
+          echo "Deployment Frequency: 1 deployment"
+          if [ ${{ steps.deployment.outcome }} == 'success' ]; then
+            echo "Deployment Success Rate: 100%"
+          else
+            echo "Deployment Success Rate: 0%"
+          fi
